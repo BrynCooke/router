@@ -6,7 +6,7 @@ use std::sync::Arc;
 
 use apollo_compiler::validation::Valid;
 use serde_json::Value;
-use tower::BoxError;
+use tower::{BoxError, ServiceExt};
 use tower::ServiceBuilder;
 use tower_service::Service;
 
@@ -139,7 +139,7 @@ impl<T: Into<Box<dyn DynPlugin + 'static>> + 'static> PluginTestHarness<T> {
                 .service_fn(move |req: router::Request| async move { (response_fn)(req).await }),
         );
 
-        self.plugin.router_service(service).call(request).await
+        self.plugin.router_service(service).oneshot(request).await
     }
 
     pub(crate) async fn call_supergraph(
@@ -152,7 +152,7 @@ impl<T: Into<Box<dyn DynPlugin + 'static>> + 'static> PluginTestHarness<T> {
                 .service_fn(move |req: supergraph::Request| async move { Ok((response_fn)(req)) }),
         );
 
-        self.plugin.supergraph_service(service).call(request).await
+        self.plugin.supergraph_service(service).oneshot(request).await
     }
 
     #[allow(dead_code)]
@@ -166,7 +166,7 @@ impl<T: Into<Box<dyn DynPlugin + 'static>> + 'static> PluginTestHarness<T> {
                 .service_fn(move |req: execution::Request| async move { Ok((response_fn)(req)) }),
         );
 
-        self.plugin.execution_service(service).call(request).await
+        self.plugin.execution_service(service).oneshot(request).await
     }
 
     #[allow(dead_code)]
@@ -183,7 +183,7 @@ impl<T: Into<Box<dyn DynPlugin + 'static>> + 'static> PluginTestHarness<T> {
 
         self.plugin
             .subgraph_service(&name.expect("subgraph name must be populated"), service)
-            .call(request)
+            .oneshot(request)
             .await
     }
     #[allow(dead_code)]
@@ -200,7 +200,7 @@ impl<T: Into<Box<dyn DynPlugin + 'static>> + 'static> PluginTestHarness<T> {
 
         self.plugin
             .http_client_service(subgraph_name, service)
-            .call(request)
+            .oneshot(request)
             .await
     }
 }
