@@ -19,7 +19,7 @@ Currently, we're publishing new releases every 1-2 weeks.
 Follow the [quickstart tutorial](https://www.apollographql.com/docs/router/quickstart/) to get up and running with the router.
 
 See [the documentation](https://www.apollographql.com/docs/router) for more details.
-
+Needs backporting
 ## Usage
 
 Apollo Router Core requires [a supergraph file](https://www.apollographql.com/docs/rover/commands/supergraphs/) to be passed as the `--supergraph` argument and [an optional configuration file](https://www.apollographql.com/docs/router/configuration/overview/#yaml-config-file).
