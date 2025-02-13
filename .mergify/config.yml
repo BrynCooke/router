@@ -32,3 +32,4 @@ defaults:
         backport:
             assignees:
             - "{{ author }}"
+            bot_account: "{{ author }}"
