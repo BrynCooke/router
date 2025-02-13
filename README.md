@@ -13,6 +13,7 @@ Apollo Router Core is well-tested, regularly benchmarked, includes most major fe
 New releases and their release notes (along with notes about any breaking changes) can be found on the [Releases](https://github.com/apollographql/router/releases) page, and the latest release can always be found [on the latest page](https://github.com/apollographql/router/releases/latest). The `CHANGELOG.md` at the root of this repository also contains _unreleased_ changes in addition to the full history of changes.
 
 Currently, we're publishing new releases every 1-2 weeks.
+Needs backport!
 
 ## Getting started
 
